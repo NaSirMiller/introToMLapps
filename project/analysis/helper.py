@@ -46,7 +46,7 @@ def add_date(market_index_df: pd.DataFrame) -> pd.DataFrame: #Add month and day 
     market_index_df["Month"] = dtobj.month
     market_index_df["Days_of_Week"] = dtobj.dayofweek
   return market_index_df
-  
+    
 def adjust_close(market_index_df: pd.DataFrame) -> pd.DataFrame: #Update price to have a universal "currency"
   price_change = []
   for open_price in market_index_df["Open"]: #Go through all open and closing prices
