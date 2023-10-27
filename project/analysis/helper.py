@@ -39,6 +39,15 @@ def add_region(market_index: str) -> pd.DataFrame:
     if (market_index in region_idx[region]):
       return region
 
+def adjust_close(market_index_df: pd.DataFrame) -> pd.DataFrame: #Update price to have a universal "currency"
+  price_change = []
+  for open_price in market_index_df["Open"]: #Go through all open and closing prices
+    for close_price in market_index_df["Close"]:
+      price_change.append(((close_price - open_price) / open_price) * 100)
+  market_index_df["Price_Change"] = price_change
+  market_index_df = pd.concat(price_change, axis = 0)
+  return market_index_df
+  
 def add_pollution_index(market_index_df: pd.DataFrame, pollution_index: pd.DataFrame) -> pd.DataFrame:
   pass
 
