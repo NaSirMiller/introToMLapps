@@ -39,6 +39,14 @@ def add_region(market_index: str) -> pd.DataFrame:
     if (market_index in region_idx[region]):
       return region
 
+def add_date(market_index_df: pd.DataFrame) -> pd.DataFrame: #Add month and day of week features to dataframe
+  # https://stackoverflow.com/questions/26105804/extract-month-from-date-in-python
+  for date in market_index_df["Date"]:
+    dtobj = dt.datetime.strptime(date, "%Y-%m-%d")
+    market_index_df["Month"] = dtobj.month
+    market_index_df["Days_of_Week"] = dtobj.dayofweek
+  return market_index_df
+  
 def adjust_close(market_index_df: pd.DataFrame) -> pd.DataFrame: #Update price to have a universal "currency"
   price_change = []
   for open_price in market_index_df["Open"]: #Go through all open and closing prices
