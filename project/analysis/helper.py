@@ -19,11 +19,25 @@ def create_market_data(market_index:str) -> pd.DataFrame: #Helper function to cr
   market_index_df = pd.concat(market_index_df, axis = 0)
   
   market_index_df = market_index_df.drop(columns = ["Stock Splits", "Dividends", "Adj Close"]) #Dropping stock splits, dividends, and adj close due to Market indices not having said features
-
-  market_index_df = market_index_df.style.set_table_attributes("style='display:inline'").set_caption(market_index + " Data from January 2010 to December 2023") #Giving the dataframe a title/name
+  market_index_df["Region"] = market_index_df.ticker.apply(lambda ticker: add_region(ticker))
+  market_index_df = market_index_df.style.set_table_attributes("style='display:inline'").set_caption(market_index + " Data from January 2010 to December 2023")   #Giving the dataframe a title/name
   # market_index_df = market_index_df.reset_index()
   
   return market_index_df
+
+def add_region(market_index: str) -> pd.DataFrame:
+  region_idx= \
+    { 'US & Canada' : ['^GSPC', '^DJI', '^IXIC', '^RUT','^GSPTSE'],
+      'Latin America' : ['^BVSP', '^MXX', '^IPSA'],
+      'East Asia' : ['^N225', '^HSI', '000001.SS', '399001.SZ', '^TWII', '^KS11'],
+      'ASEAN & Oceania' : ['^STI', '^JKSE', '^KLSE','^AXJO',  '^NZ50'],
+      'South & West Asia' : ['^BSESN', '^TA125.TA'],
+      'Europe' : ['^FTSE', '^GDAXI', '^FCHI', '^STOXX50E','^N100', '^BFX']
+    }
+
+  for region in region_idx:
+    if (market_index in region_idx[region]):
+      return region
 
 def add_pollution_index(market_index_df: pd.DataFrame, pollution_index: pd.DataFrame) -> pd.DataFrame:
   pass
