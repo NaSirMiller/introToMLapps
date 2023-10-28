@@ -1,9 +1,6 @@
 '''
 This helper module is to create dataframes for each market index, i.e. S&P 500, and their data
 from January 1st, 2010 to Now (December 31st, 2023)
-
-Implementation comes from: https://towardsdatascience.com/analyzing-world-stock-indices-performance-in-python-610df6a578f
-Global Supply Chain Index: https://www.newyorkfed.org/research/policy/gscpi#/interactive
 '''
 
 #Imports
@@ -57,7 +54,7 @@ def adjust_close(market_index_df: pd.DataFrame) -> pd.DataFrame: #Update price t
   market_index_df = pd.concat(price_change, axis = 0)
   return market_index_df
   
-def add_pollution_index(market_index_df: pd.DataFrame, pollution_index: pd.DataFrame) -> pd.DataFrame:
+# def add_pollution_index(market_index_df: pd.DataFrame, pollution_index: pd.DataFrame) -> pd.DataFrame:
   
 
 def get_impactful_events() -> dict: #Function to find the most impactful events on Stock Market from 2020 to 2023
@@ -70,7 +67,7 @@ def get_impactful_events() -> dict: #Function to find the most impactful events 
   high_impact_times["Israeli_Hamas_War"] = third_infitada
   return high_impact_times
 
-def clean_gscpi_index_df(gscpi_index_df: pd.DataFrame) -> pd.DataFrame: #Cleaning GSCPI index dataframe, removing nulls and prior CSV/XLS  gscpi_index_df = gscpi_index_df[["Date","GSCPI"]]
+def clean_gscpi_df(gscpi_index_df: pd.DataFrame) -> pd.DataFrame: #Cleaning GSCPI index dataframe, removing nulls and prior CSV/XLS  gscpi_index_df = gscpi_index_df[["Date","GSCPI"]]
   gscpi_index_df = gscpi_index_df.dropna()
   updated_dates = []
   gscpi_index_df["Date"] = gscpi_index_df["Date"].apply(lambda date: updated_dates.append(date) if (date[7:] >= 2010) else 1) #Gather all data ranging from 2010 to now
@@ -84,4 +81,26 @@ def clean_gscpi_index_df(gscpi_index_df: pd.DataFrame) -> pd.DataFrame: #Cleanin
   gscpi_index_df["Date"] = updated_dates
   return gscpi_index_df
 
-def create_
+def clean_ecpi_df(ecpi_m_df: pd.DataFrame) -> pd.DataFrame: #Cleaning ECPI index dataframe, removing nulls and prior CSV/XLS formatting
+  parsed_columns = []
+  for column in ecpi_m_df.columns:
+    if (column.isdigit()):
+      if (int(column) >= 201001):
+        parsed_columns.append(column)
+    elif (column.isalpha()):
+      parsed_columns.append(column)
+  ecpi_m_df = ecpi_m_df[parsed_columns]
+  ecpi_m_df = ecpi_m_df.dropna(axis = 0)
+  return ecpi_m_df
+
+def clean_ccpi_df(ccpi_m_df: pd.DataFrame) -> pd.DataFrame: #Cleaning CCPI index dataframe, removing nulls and prior CSV/XLS formatting
+  parsed_columns = []
+  for column in ccpi_m_df.columns:
+    if (column.isdigit()):
+      if (int(column) >= 201001):
+        parsed_columns.append(column)
+    elif (column.isalpha()):
+      parsed_columns.append(column)
+  ccpi_m_df = ccpi_m_df[parsed_columns]
+  ccpi_m_df = ccpi_m_df.dropna(axis = 0)
+  return ccpi_m_df
