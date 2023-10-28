@@ -1,6 +1,6 @@
 Problem Statement:
    Do external factors effect the stock market, if so, how much is performance affected
-   Are the stock prices an indicator of the environment
+   Are stock prices an indicator of the environment?
 
    What we define as external factors:
       1. Politics
@@ -22,43 +22,5 @@ Problem Statement:
             a) Supply Chain issues caused
             
       3. Physical environment
-         - Crackdown on combustion engine vehicles and push towards electric vehicles
-
-Historical Stock Impacts:
-
-   https://www.bankrate.com/investing/biggest-stock-market-crashes-in-us-history/
-   *The six largest single-day point declines for the Dow all occurred in the first six months of 2020 
-   as investors grappled with the impact of the COVID-19 pandemic.
-   *Largest single-day point decline for DOW and S&P occured on March 16, 2020
-   *Black Tuesday
-   *Black Monday
-   *Dotcom Bubble crashes
-   *Global Finanical Crisis 
-   *COVID-19
-
-
-
-What needs to be done:
-   - Collect data from last year (historical data)
-   - see how environment effects stock data
-
-Where to find data:
-- US Bureuau of labor statistics
-
-
-Specific Ideas and scenarios:
-1. Impact of pollution on stock prices
-   *New Delhi
-      --Flight delays
-
-2. (Google) reviews impact on stock prices
-
-3. BLM effects on black owned businesses
-
-Add column based on bull or bear factor
-2011 to now
-dt library
-add days of week and months 
-one hot encoding
-
- see how much do the external factors have an influence in predicting the stock prices
+         * Crackdown on combustion engine vehicles and push towards electric vehicles
+         * Pollution index
