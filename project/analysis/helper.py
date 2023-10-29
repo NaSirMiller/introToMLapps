@@ -54,7 +54,7 @@ def adjust_close(market_index_df: pd.DataFrame) -> pd.DataFrame: #Update price t
   market_index_df = pd.concat(price_change, axis = 0)
   return market_index_df
   
-# def add_pollution_index(market_index_df: pd.DataFrame, pollution_index: pd.DataFrame) -> pd.DataFrame:
+# def add_epsi_index(market_index_df: pd.DataFrame, : pd.DataFrame) -> pd.DataFrame:
   
 
 def get_impactful_events() -> dict: #Function to find the most impactful events on Stock Market from 2020 to 2023
@@ -103,4 +103,11 @@ def clean_ccpi_df(ccpi_m_df: pd.DataFrame) -> pd.DataFrame: #Cleaning CCPI index
       parsed_columns.append(column)
   ccpi_m_df = ccpi_m_df[parsed_columns]
   ccpi_m_df = ccpi_m_df.dropna(axis = 0)
+  ccpi_m_df = ccpi_m_df.drop(columns = ["Country Code", "Indicator Type", "IMF Country Code", "Series Name"])
   return ccpi_m_df
+
+def clean_epsi(epsi_df: pd.DataFrame) -> pd.DataFrame: #Cleaning EPSI index dataframe, removing nulls and formatting
+  epsi_df = epsi_df.drop(columns = ["VAR","Variable","YEA","Unit Code", "Unit","PowerCode Code","PowerCode", "Reference Period Code", "Reference Period","Flag Codes", "Flags","COU"])
+  epsi_df = epsi_df.rename(columns = {"Value":"EPSI"})
+  #Add code to fix years & country
+  
