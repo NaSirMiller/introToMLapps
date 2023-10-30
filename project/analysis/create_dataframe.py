@@ -9,7 +9,7 @@ import pandas as pd
 import yfinance as yf
 
 
-def create_market_data(market_index: str, gscpi_index_df: pd.DataFrame) -> pd.DataFrame: #Helper function to create different dataframes for market indexes from 2009 to 2023
+def market_index_df(market_index: str) -> pd.DataFrame: #Helper function to create different dataframes for market indexes from 2009 to 2023
   market_index_df = []
   ticker_data = yf.Ticker(market_index)
   ticker_df = ticker_data.history(period = "1d", start = "2010-1-1", end = "2023-12-31")
@@ -67,7 +67,7 @@ def get_impactful_events() -> dict: #Function to find the most impactful events 
   high_impact_times["Israeli_Hamas_War"] = third_infitada
   return high_impact_times
 
-def clean_gscpi_df(gscpi_index_df: pd.DataFrame) -> pd.DataFrame: #Cleaning GSCPI index dataframe, removing nulls and prior CSV/XLS  gscpi_index_df = gscpi_index_df[["Date","GSCPI"]]
+def gscpi_df(gscpi_index_df: pd.DataFrame) -> pd.DataFrame: #Cleaning GSCPI index dataframe, removing nulls and prior CSV/XLS  gscpi_index_df = gscpi_index_df[["Date","GSCPI"]]
   gscpi_index_df = gscpi_index_df.dropna()
   updated_dates = []
   gscpi_index_df["Date"] = gscpi_index_df["Date"].apply(lambda date: updated_dates.append(date) if (date[7:] >= 2010) else 1) #Gather all data ranging from 2010 to now
@@ -81,7 +81,7 @@ def clean_gscpi_df(gscpi_index_df: pd.DataFrame) -> pd.DataFrame: #Cleaning GSCP
   gscpi_index_df["Date"] = updated_dates
   return gscpi_index_df
 
-def clean_ecpi_df(ecpi_m_df: pd.DataFrame) -> pd.DataFrame: #Cleaning ECPI index dataframe, removing nulls and prior CSV/XLS formatting
+def ecpi_df(ecpi_m_df: pd.DataFrame) -> pd.DataFrame: #Cleaning ECPI index dataframe, removing nulls and prior CSV/XLS formatting
   parsed_columns = []
   for column in ecpi_m_df.columns:
     if (column.isdigit()):
@@ -93,7 +93,7 @@ def clean_ecpi_df(ecpi_m_df: pd.DataFrame) -> pd.DataFrame: #Cleaning ECPI index
   ecpi_m_df = ecpi_m_df.dropna(axis = 0)
   return ecpi_m_df
 
-def clean_ccpi_df(ccpi_m_df: pd.DataFrame) -> pd.DataFrame: #Cleaning CCPI index dataframe, removing nulls and prior CSV/XLS formatting
+def ccpi_df(ccpi_m_df: pd.DataFrame) -> pd.DataFrame: #Cleaning CCPI index dataframe, removing nulls and prior CSV/XLS formatting
   parsed_columns = []
   for column in ccpi_m_df.columns:
     if (column.isdigit()):
@@ -106,8 +106,7 @@ def clean_ccpi_df(ccpi_m_df: pd.DataFrame) -> pd.DataFrame: #Cleaning CCPI index
   ccpi_m_df = ccpi_m_df.drop(columns = ["Country Code", "Indicator Type", "IMF Country Code", "Series Name"])
   return ccpi_m_df
 
-def clean_epsi(epsi_df: pd.DataFrame) -> pd.DataFrame: #Cleaning EPSI index dataframe, removing nulls and formatting
+def epsi_df(epsi_df: pd.DataFrame) -> pd.DataFrame: #Cleaning EPSI index dataframe, removing nulls and formatting
   epsi_df = epsi_df.drop(columns = ["VAR","Variable","YEA","Unit Code", "Unit","PowerCode Code","PowerCode", "Reference Period Code", "Reference Period","Flag Codes", "Flags","COU"])
   epsi_df = epsi_df.rename(columns = {"Value":"EPSI"})
-  #Add code to fix years & country
-  
+  return epsi_df
