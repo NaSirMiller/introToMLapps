@@ -1,7 +1,0 @@
-#Replace all NaNs with the average value of that year for their country
-yearly_avg_epsi = epsi_ecpi_ccpi_df.groupby(['Country', 'Date'])['EPSI'].transform('mean')
-epsi_ecpi_ccpi_df['EPSI'] = epsi_ecpi_ccpi_df['EPSI'].fillna(yearly_avg_epsi)
-yearly_avg_ccpi = epsi_ecpi_ccpi_df.groupby(['Country', 'Date'])['CCPI'].transform('mean')
-epsi_ecpi_ccpi_df['CCPI'] = epsi_ecpi_ccpi_df['CCPI'].fillna(yearly_avg_ccpi)
-yearly_avg_ecpi = epsi_ecpi_ccpi_df.groupby(['Country', 'Date'])['ECPI'].transform('mean')
-epsi_ecpi_ccpi_df['ECPI'] = epsi_ecpi_ccpi_df['ECPI'].fillna(yearly_avg_ecpi)
