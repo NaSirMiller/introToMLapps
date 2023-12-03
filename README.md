@@ -16,6 +16,7 @@ Problem Statement:
          *Recent & Significant (2020 to 2023)
          -Israel-Palenstine conflict
          -Russian-Ukranian conflict
+         Note: Due to lack of recent data on the CCPI, ECPI, GSCPI, etc we will only look at values from 2010 to early 2023
       2. Economy
          *Recent (2020 to 2023)
          - COVID-19
