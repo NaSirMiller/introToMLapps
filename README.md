@@ -39,6 +39,5 @@ Problem Statement:
    3. ChatGPT
    4. https://stackoverflow.com/questions/26105804/extract-month-from-date-in-python
 
-      
-      
-      
+Improvements that I would make:
+1. Address outliers properly
